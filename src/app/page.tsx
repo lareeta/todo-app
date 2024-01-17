@@ -16,6 +16,16 @@ function CloseIcon() {
 }
 
 export default function Home() {
+  const tasks = [
+    "Make UI design in Figma",
+    "Implement the markup with pure HTML/CSS",
+    "Make the markup interactive using pure JavaScript",
+    "Publish the repository in GitHub",
+    "Deploy the app to Netlify",
+    "Read and write tasks from/to local storage",
+    "Rewrite the app using React.js",
+  ];
+
   return (
     <div className="container">
       <div className="head">
@@ -23,69 +33,18 @@ export default function Home() {
         <button className="button">ADD</button>
       </div>
       <div className="tasks">
-        <div className="taskItem">
-          <label>
-            <input type="checkbox" />
-            <span>Make UI design in Figma</span>
-          </label>
-          <button className="buttonItem">
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="taskItem">
-          <label>
-            <input type="checkbox" />
-            <span>Implement the markup with pure HTML/CSS</span>
-          </label>
-          <button className="buttonItem">
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="taskItem">
-          <label>
-            <input type="checkbox" />
-            <span>Make the markup interactive using pure JavaScript</span>
-          </label>
-          <button className="buttonItem">
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="taskItem">
-          <label>
-            <input type="checkbox" />
-            <span>Publish the repository in GitHub</span>
-          </label>
-          <button className="buttonItem">
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="taskItem">
-          <label>
-            <input type="checkbox" />
-            <span>Deploy the app to Netlify</span>
-          </label>
-          <button className="buttonItem">
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="taskItem">
-          <label>
-            <input type="checkbox" />
-            <span>Read and write tasks from/to local storage</span>
-          </label>
-          <button className="buttonItem">
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="taskItem">
-          <label>
-            <input type="checkbox" />
-            <span>Rewrite the app using React.js</span>
-          </label>
-          <button className="buttonItem">
-            <CloseIcon />
-          </button>
-        </div>
+        {tasks.map((taskItems, i) => (
+          <div className="taskItem" key={i}>
+            <label>
+              <input type="checkbox" />
+
+              <span>{taskItems}</span>
+            </label>
+            <button className="buttonItem">
+              <CloseIcon />
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
