@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 function CloseIcon() {
   return (
     <svg
@@ -16,7 +20,7 @@ function CloseIcon() {
 }
 
 export default function Home() {
-  const tasks = [
+  const [tasks, setTasks] = useState([
     "Make UI design in Figma",
     "Implement the markup with pure HTML/CSS",
     "Make the markup interactive using pure JavaScript",
@@ -24,23 +28,55 @@ export default function Home() {
     "Deploy the app to Netlify",
     "Read and write tasks from/to local storage",
     "Rewrite the app using React.js",
-  ];
+  ]);
+
+  const [name, setName] = useState("");
+
+  function handleChange(event: any) {
+    setName(event.target.value);
+  }
+
+  function handleAdd() {
+    if (name == "") {
+      return;
+    }
+
+    if (tasks.includes(name)) {
+      return;
+    }
+
+    const newList = tasks.concat(name);
+    setName("");
+    setTasks(newList);
+  }
+
+  const deleteByValue = (value: string) => {
+    setTasks((oldValues) => {
+      return oldValues.filter((task) => task !== value);
+    });
+  };
 
   return (
     <div className="container">
       <div className="head">
-        <input className="input" placeholder="Type task name"></input>
-        <button className="button">ADD</button>
+        <input
+          className="input"
+          placeholder="Type task name"
+          value={name}
+          onChange={handleChange}
+        ></input>
+        <button className="button" onClick={handleAdd}>
+          ADD
+        </button>
       </div>
       <div className="tasks">
-        {tasks.map((taskItems, i) => (
-          <div className="taskItem" key={i}>
+        {tasks.map((task) => (
+          <div className="taskItem" key={task}>
             <label>
               <input type="checkbox" />
-
-              <span>{taskItems}</span>
+              <span>{task}</span>
             </label>
-            <button className="buttonItem">
+            <button className="buttonItem" onClick={() => deleteByValue(task)}>
               <CloseIcon />
             </button>
           </div>
