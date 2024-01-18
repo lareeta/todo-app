@@ -64,6 +64,7 @@ export default function Home() {
     <div className="container">
       <div className="head">
         <input
+          autoFocus
           className="input"
           placeholder="Type task name"
           value={name}
