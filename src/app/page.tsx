@@ -30,7 +30,7 @@ export default function Home() {
     "Rewrite the app using React.js",
     "Add new task by pressing on Enter",
     "Cursor autofocus in the input",
-    "Adaptive styles for mobile devices"
+    "Adaptive styles for mobile devices",
   ]);
 
   const [name, setName] = useState("");
@@ -40,7 +40,7 @@ export default function Home() {
   }
 
   function handleAdd() {
-    const newList = tasks.concat(name);
+    const newList = tasks.concat(name.trim());
     setName("");
     setTasks(newList);
   }
@@ -51,8 +51,15 @@ export default function Home() {
     });
   };
 
-  const isAddButtonDisabled = name === "" || tasks.includes(name);
+  const isAddButtonDisabled = name.trim() === "" || tasks.includes(name.trim());
+  
 
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter" && !isAddButtonDisabled) {
+      handleAdd();
+    }
+  };
+  
   return (
     <div className="container">
       <div className="head">
@@ -61,6 +68,7 @@ export default function Home() {
           placeholder="Type task name"
           value={name}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         ></input>
         <button
           className="button"
@@ -85,4 +93,5 @@ export default function Home() {
       </div>
     </div>
   );
+
 }
