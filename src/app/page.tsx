@@ -28,6 +28,9 @@ export default function Home() {
     "Deploy the app to Netlify",
     "Read and write tasks from/to local storage",
     "Rewrite the app using React.js",
+    "Add new task by pressing on Enter",
+    "Cursor autofocus in the input",
+    "Adaptive styles for mobile devices"
   ]);
 
   const [name, setName] = useState("");
@@ -37,14 +40,6 @@ export default function Home() {
   }
 
   function handleAdd() {
-    if (name == "") {
-      return;
-    }
-
-    if (tasks.includes(name)) {
-      return;
-    }
-
     const newList = tasks.concat(name);
     setName("");
     setTasks(newList);
@@ -56,6 +51,8 @@ export default function Home() {
     });
   };
 
+  const isAddButtonDisabled = name === "" || tasks.includes(name);
+
   return (
     <div className="container">
       <div className="head">
@@ -65,7 +62,11 @@ export default function Home() {
           value={name}
           onChange={handleChange}
         ></input>
-        <button className="button" onClick={handleAdd}>
+        <button
+          className="button"
+          onClick={handleAdd}
+          disabled={isAddButtonDisabled}
+        >
           ADD
         </button>
       </div>

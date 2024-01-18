@@ -66,11 +66,17 @@ body {
   cursor: pointer;
 }
 
-.head .button:hover {
+.head .button:disabled {
+  background:#F5F5F5;
+  color: #D2D2D2;
+  cursor: default;
+}
+
+.head .button:not([disabled]):hover {
   background-color: #F5F5F5;
 }
 
-.head .button:active {
+.head .button:not([disabled]):active {
   background-color: #D2D2D2;
 }
 
